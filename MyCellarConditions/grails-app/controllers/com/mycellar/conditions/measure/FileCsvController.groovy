@@ -1,10 +1,16 @@
 package com.mycellar.conditions.measure
 
+import java.text.DateFormat;
+import org.hibernate.StatelessSession
+import org.hibernate.Transaction
+import org.apache.commons.logging.LogFactory
 import grails.converters.JSON
 
 
 class FileCsvController {
 
+	private static final log = LogFactory.getLog(this)
+	
 	static final int BUFF_SIZE = 100000;
 	static final byte[] buffer = new byte[BUFF_SIZE];
 
@@ -32,6 +38,8 @@ class FileCsvController {
 		def testIterator= 1
 		int status = 0
 		def statusText = ""
+		
+		log.error("==handle==")
 		
 		// set response content type to json
 		response.contentType = 'application/json'
@@ -99,6 +107,9 @@ class FileCsvController {
 
 			status = 200
 			statusText = "'${file.name}' upload successful!"
+			
+			
+			
 		} catch (Exception e) {
 			// whoops, looks like something went wrong
 			status = 500
@@ -123,9 +134,15 @@ class FileCsvController {
 			} catch (Exception e) { }
 		}
 		
+		// Redirect to parsing method
+		//redirect(action:"parseFile", params: [ file: file.name, uploadr: info])
+		
+		forward(action: "parsefile")
 		// render json response
 		response.setStatus(status, statusText)
 		render([written: (status == 200), fileName: file.name, status: status, statusText: statusText] as JSON)
+		
+		
 		}
 
 		def delete = {
@@ -193,4 +210,52 @@ class FileCsvController {
 			// return false as we do not have a view
 			return false
 		}
+		
+	def parsefile = {
+
+		log.error("==parseFile==")
+		
+//		def fileName = params.get('file')
+//		def name 	 = params.get('uploadr')
+//		def info	 = session.getAttribute('uploadr')
+//		def savePath = (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
+		def file	 = new File("C:/TEMP", "usbdatalogger.csv")
+	
+		if (file.exists()) {
+//			response.setStatus(200)
+//			response.setHeader("Content-disposition", "attachment; filename=\"${fileName}\"")
+//			response.setContentType("application/octet-stream")
+//			response.setContentLength(file.size() as int)
+
+			Serie serie = new Serie("importedSerie", "CSV", null).save()
+			
+			//CSV IMPORT PLUGIN
+			file.toCsvReader(['skipLines':'1']).eachCsvLine { tokens ->
+				new Measure( DateFormat.parse("yyyy-M-d HH:mm", tokens[0]),        //Timestamp
+							tokens[1],		  //Temperature
+							tokens[2])		 //Humidite
+							.addToSerie(serie)
+							.save() 
+			}
+			
+			
+			//BULK INSERT FOR PERFORMANCE
+//			StatelessSession session = sessionFactory.openStatelessSession()
+//			Transaction tx = session.beginTransaction()
+//			file.eachLine() {line ->
+//				Measure measure = new Measure( 
+//										DateFormat.parse("yyyy-M-d HH:mm", line[0]),        //Timestamp
+//										line[1],		  //Temperature
+//										line[2])
+//				measure.addToSerie(serie)
+//				measure.save()
+//				session.insert(measure)
+//			}
+//			tx.commit()
+//			session.close()
+		}
+		
+		render serie.get() as JSON
+		
+	}
 }
