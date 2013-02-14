@@ -39,10 +39,10 @@
 					<g:render template="form"/>
 				</fieldset>
 				
-<uploadr:demo/>
+
+<uploadr:add name="myUploadrCsv" controller="fileCsv" action="handle" path="C:/temp/" direction="up" viewable="false" downloadable="false" deletable="false" allowedExtensions="txt,csv" />
 
 
-							
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
