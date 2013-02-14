@@ -98,8 +98,3 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.mycellar.con
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.mycellar.conditions.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.Role'
 
-
-// CSV File uploader 
-csvuploader {
-	temporaryFile = '/tmp/uploaded.file' // Path to where files will be uploaded
-}

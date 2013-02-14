@@ -1,9 +1,9 @@
 package com.mycellar.conditions.measure
 
-class Measure {
+class Measure implements Comparable {
 
 	Date 	measureDate
-	Integer	celsiusTemperature
+	Float	celsiusTemperature
 	Integer	humidity
 
 	int compareTo(obj) {
@@ -15,6 +15,6 @@ class Measure {
     static constraints = {
 		measureDate( nullable: false)
 		humidity(range:0..100, nullable: false)
-		celsiusTemperature(nullable:false, range:-20..40)
+		celsiusTemperature(nullable:false)
     }
 }

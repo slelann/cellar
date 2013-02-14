@@ -227,18 +227,24 @@ class FileCsvController {
 //			response.setContentType("application/octet-stream")
 //			response.setContentLength(file.size() as int)
 
-			Serie serie = new Serie("importedSerie", "CSV", null).save()
+			Serie serie = Serie.get(1)
 			
 			//CSV IMPORT PLUGIN
-			file.toCsvReader(['skipLines':'1']).eachCsvLine { tokens ->
-				new Measure( DateFormat.parse("yyyy-M-d HH:mm", tokens[0]),        //Timestamp
-							tokens[1],		  //Temperature
-							tokens[2])		 //Humidite
-							.addToSerie(serie)
-							.save() 
+			file.toCsvReader(['skipLines':'1']).eachLine { tokens ->
+				Measure measure = new Measure( measureDate: new Date().parse("yyyy-M-d HH:mm", tokens[0]),        //Timestamp
+												celsiusTemperature: Float.parseFloat(tokens[1]),		  //Temperature
+												humidity : Integer.parseInt(tokens[2]))		 //Humidite
+
+				measure.setSerie(serie)
+				measure.save() 
 			}
 			
-			
+//			new Measure( measureDate: new Date().parse("yyyy-M-d HH:mm", tokens[0]),        //Timestamp
+//				celsiusTemperature: Float.parseFloat(tokens[1]),		  //Temperature
+//				humidity : Integer.parseInt(tokens[2]))		 //Humidite
+//			   .setSerie(serie)
+//			   .save()
+
 			//BULK INSERT FOR PERFORMANCE
 //			StatelessSession session = sessionFactory.openStatelessSession()
 //			Transaction tx = session.beginTransaction()
@@ -255,7 +261,7 @@ class FileCsvController {
 //			session.close()
 		}
 		
-		render serie.get() as JSON
+		render Serie.get(1) as JSON
 		
 	}
 }

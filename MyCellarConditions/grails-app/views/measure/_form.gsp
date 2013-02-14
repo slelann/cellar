@@ -7,7 +7,7 @@
 		<g:message code="measure.measureDate.label" default="Measure Date" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="measureDate" precision="minute"  value="${measureInstance?.measureDate}"  />
+	<g:datePicker name="measureDate" precision="day"  value="${measureInstance?.measureDate}"  />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: measureInstance, field: 'humidity', 'error')} required">
@@ -23,7 +23,7 @@
 		<g:message code="measure.celsiusTemperature.label" default="Celsius Temperature" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="celsiusTemperature" from="${-50..50}" class="range" required="" value="${fieldValue(bean: measureInstance, field: 'celsiusTemperature')}"/>
+	<g:field name="celsiusTemperature" value="${fieldValue(bean: measureInstance, field: 'celsiusTemperature')}" required=""/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: measureInstance, field: 'serie', 'error')} required">
