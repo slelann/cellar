@@ -215,18 +215,15 @@ class FileCsvController {
 
 		log.error("==parseFile==")
 		
-//		def fileName = params.get('file')
-//		def name 	 = params.get('uploadr')
-//		def info	 = session.getAttribute('uploadr')
-//		def savePath = (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
-		def file	 = new File("C:/TEMP", "usbdatalogger.csv")
+		def fileName = params.get('file')
+		def name 	 = params.get('uploadr')
+		def info	 = session.getAttribute('uploadr')
+		def savePath = (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
+		def file	 = new File(savePath, fileName)
 	
 		if (file.exists()) {
-//			response.setStatus(200)
-//			response.setHeader("Content-disposition", "attachment; filename=\"${fileName}\"")
-//			response.setContentType("application/octet-stream")
-//			response.setContentLength(file.size() as int)
 
+			//TODO récupérer série en cours de modif
 			Serie serie = Serie.get(1)
 			
 			//CSV IMPORT PLUGIN
@@ -239,28 +236,9 @@ class FileCsvController {
 				measure.save() 
 			}
 			
-//			new Measure( measureDate: new Date().parse("yyyy-M-d HH:mm", tokens[0]),        //Timestamp
-//				celsiusTemperature: Float.parseFloat(tokens[1]),		  //Temperature
-//				humidity : Integer.parseInt(tokens[2]))		 //Humidite
-//			   .setSerie(serie)
-//			   .save()
-
-			//BULK INSERT FOR PERFORMANCE
-//			StatelessSession session = sessionFactory.openStatelessSession()
-//			Transaction tx = session.beginTransaction()
-//			file.eachLine() {line ->
-//				Measure measure = new Measure( 
-//										DateFormat.parse("yyyy-M-d HH:mm", line[0]),        //Timestamp
-//										line[1],		  //Temperature
-//										line[2])
-//				measure.addToSerie(serie)
-//				measure.save()
-//				session.insert(measure)
-//			}
-//			tx.commit()
-//			session.close()
 		}
 		
+		//TODO redirection vers le bon écran
 		render Serie.get(1) as JSON
 		
 	}
