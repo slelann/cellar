@@ -95,6 +95,8 @@ grails.project.dependency.resolution = {
 		compile ":uploadr:0.6.0.1"
 		
 		compile ":wslite:0.7.1.0"
+		
+		compile ":quartz:1.0-RC5"
     }
 	
 }
