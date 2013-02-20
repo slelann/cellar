@@ -8,6 +8,6 @@ class OpenWeatherMapJobTests {
     }
 
     def execute() {
-        // execute job
+        // execute job 
     }
 }
