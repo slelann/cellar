@@ -44,14 +44,14 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
 		mavenRepo "http://maven.springframework.org/milestone/"
-		
+		mavenRepo "https://oss.sonatype.org/content/groups/public/"
 		
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
-        // runtime 'mysql:mysql-connector-java:5.1.20'
+        runtime 'mysql:mysql-connector-java:5.1.20'
     }
 
     plugins {
@@ -93,8 +93,8 @@ grails.project.dependency.resolution = {
 		compile ":csv:0.3.1"
 		compile ":modernizr:2.0.6"
 		compile ":uploadr:0.6.0.1"
-
-
+		
+		compile ":wslite:0.7.1.0"
     }
 	
 }
