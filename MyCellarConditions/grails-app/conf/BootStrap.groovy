@@ -1,3 +1,4 @@
+import com.mycellar.conditions.measure.Serie
 import com.mycellar.conditions.user.Role;
 import com.mycellar.conditions.user.User;
 import com.mycellar.conditions.user.UserRole;
