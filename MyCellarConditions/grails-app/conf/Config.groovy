@@ -98,3 +98,12 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.mycellar.con
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.mycellar.conditions.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.Role'
 
+// My constants
+openweathermap {
+	service	{
+		urlClient   = 'http://api.openweathermap.org/data/2.1/'
+		pathStation  = ''
+		pathWeather = '/weather/city/3032965'
+	}
+}
+	 

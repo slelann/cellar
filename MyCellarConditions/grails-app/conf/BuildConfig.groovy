@@ -93,10 +93,11 @@ grails.project.dependency.resolution = {
 		compile ":csv:0.3.1"
 		compile ":modernizr:2.0.6"
 		compile ":uploadr:0.6.0.1"
-		
+		// WS client
 		compile ":wslite:0.7.1.0"
-		
+		// QUARTZ jobs
 		compile ":quartz:1.0-RC5"
+		compile ":quartz-monitor:0.3-RC1"
     }
 	
 }
