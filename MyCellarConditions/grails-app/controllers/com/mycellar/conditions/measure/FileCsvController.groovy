@@ -38,7 +38,7 @@ class FileCsvController {
 		def testIterator= 1
 		int status = 0
 		def statusText = ""
-		
+		def serieId = params.get(redirect, redirect)
 		log.error("==handle==")
 		
 		// set response content type to json
@@ -137,7 +137,7 @@ class FileCsvController {
 		// Redirect to parsing method
 		//redirect(action:"parseFile", params: [ file: file.name, uploadr: info])
 		
-		forward(action: "parsefile")
+		forward(action: "parsefile", params: [ serieName: file.name, filePath: file.path])
 		// render json response
 		response.setStatus(status, statusText)
 		render([written: (status == 200), fileName: file.name, status: status, statusText: statusText] as JSON)
@@ -150,7 +150,7 @@ class FileCsvController {
 			def name = request.getHeader('X-Uploadr-Name')
 			def info	= session.getAttribute('uploadr')
 			def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
-			def file	= new File(savePath,fileName)
+			def file	= new File(savePath,fileName.toString())
 			
 			if (file.exists()) {
 				try {
@@ -213,33 +213,30 @@ class FileCsvController {
 		
 	def parsefile = {
 
-		log.error("==parseFile==")
+		log.debug("==parseFile==")
 		
-		def fileName = params.get('file')
-		def name 	 = params.get('uploadr')
-		def info	 = session.getAttribute('uploadr')
-		def savePath = (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
-		def file	 = new File(savePath, fileName)
+		def String savePath = params.get('filePath')
+		def File file	 = new File(savePath)
 	
+		//TODO récupérer série en cours de modif
+		Serie serieCave = Serie.findByPlace("Maison")
+		
 		if (file.exists()) {
-
-			//TODO récupérer série en cours de modif
-			Serie serie = Serie.get(1)
-			
 			//CSV IMPORT PLUGIN
 			file.toCsvReader(['skipLines':'1']).eachLine { tokens ->
-				Measure measure = new Measure( measureDate: new Date().parse("yyyy-M-d HH:mm", tokens[0]),        //Timestamp
-												celsiusTemperature: Float.parseFloat(tokens[1]),		  //Temperature
-												humidity : Integer.parseInt(tokens[2]))		 //Humidite
+				Measure measure = new Measure( measureDate: new Date().parse("yyyy-M-d HH:mm", tokens[0]), //Timestamp
+											   celsiusTemperature: Float.parseFloat(tokens[1]),		       //Temperature
+											   humidity : Integer.parseInt(tokens[2]))		               //Humidite
 
-				measure.setSerie(serie)
+				measure.setSerie(serieCave)
 				measure.save() 
+				print measure
 			}
 			
 		}
 		
 		//TODO redirection vers le bon écran
-		render Serie.get(1) as JSON
+		render serieCave as JSON
 		
 	}
 }

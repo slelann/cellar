@@ -13,8 +13,6 @@ class OpenWeatherMapMeasure extends Measure {
      String  weatherIconUrl    
     
     static constraints = {
-          cloudsCover(range:0..100)
-          windDegree(range:0..100)
     }
     
 /*     { "clouds" : { "all" : 0 },

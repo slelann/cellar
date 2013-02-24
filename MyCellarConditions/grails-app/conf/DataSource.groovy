@@ -8,11 +8,21 @@ environments {
     development {
         dataSource {
             pooled = true
-            driverClassName = "org.h2.Driver"
-            username = "sa"
-            password = ""
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "root"
+            password = "satanas"
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://localhost:3306/cellardb?autoreconnect=true"
+			properties {
+				maxActive = -1
+				minEvictableIdleTimeMillis=1800000
+				timeBetweenEvictionRunsMillis=1800000
+				numTestsPerEvictionRun=3
+				testOnBorrow=true
+				testWhileIdle=true
+				testOnReturn=true
+				validationQuery="SELECT 1"
+			 }
         }
     }
     test {

@@ -9,6 +9,14 @@ class Measure implements Comparable {
 	int compareTo(obj) {
 		measureDate.compareTo(obj.measureDate)
 	}
+	
+	String toString() {
+		StringBuffer sb = new StringBuffer()
+		sb.append(measureDate).append(" - ")
+		sb.append(celsiusTemperature).append("° - ")
+		sb.append(humidity).append("%")
+		return sb.toString()
+	}
 		
 	static belongsTo = [serie: Serie]
 	
