@@ -5,6 +5,8 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'serie.label', default: 'Serie')}" />
+<%--		<gvisualization:apiImport/>--%>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -50,6 +52,12 @@
 						</g:each>
 					
 				</li>
+				<br>
+				<g:form>
+				<input type="button" value="Render Pie Chart" onclick="${remoteFunction(controller:'visualization',action:'render',update:'chart')}" >
+				</g:form>
+				<div id="chart"></div>
+				
 				</g:if>
 			
 			</ol>

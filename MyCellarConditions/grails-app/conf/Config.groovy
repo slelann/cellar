@@ -101,9 +101,8 @@ grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.Rol
 // My constants
 openweathermap {
 	service	{
-		urlClient   = 'http://api.openweathermap.org/data/2.1/'
-		pathStation  = ''
-		pathWeather = '/weather/city/3032965'
+		urlClient   = 'http://api.openweathermap.org/data/2.1/weather'
+		pathWeather = '/city/3032965?units=metric'
 	}
 }
 	 

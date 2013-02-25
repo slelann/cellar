@@ -11,12 +11,12 @@ grails.project.source.level = 1.6
 //   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
 //]
 
-System.properties.putAll([
-	"http.proxyHost": "proxybkp",
-	 "http.proxyPort": "8080",
-	 "http.proxyUserName": "rlhw9764",
-	 "http.proxyPassword": "ma1T!t02*"
- ])
+//System.properties.putAll([
+//	"http.proxyHost": "proxybkp",
+//	 "http.proxyPort": "8080",
+//	 "http.proxyUserName": "rlhw9764",
+//	 "http.proxyPassword": "ma1T!t02*"
+// ])
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies

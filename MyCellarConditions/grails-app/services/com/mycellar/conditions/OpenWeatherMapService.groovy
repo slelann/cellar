@@ -27,6 +27,7 @@ class OpenWeatherMapService {
 		def json = JSON.parse(response.text)
 		
 		Serie serieExt = Serie.findByPlace("Chevaigne")
+		
 		OpenWeatherMapMeasure owmMesure = new OpenWeatherMapMeasure(measureDate: new Date().parse("yyyy-MM-dd HH:mm:ss", json.date),
 																	celsiusTemperature: json.main.temp,
 																	humidity:json.main.humidity,
@@ -46,15 +47,5 @@ class OpenWeatherMapService {
 		
 		//return json
 	}
-	
-	JSONObject getWeatherByStation() {
-		def response = restClient.get(path:grailsApplication.config.openweathermap.service.pathStation,
-										accept: ContentType.JSON,
-										query: [units: "metric"])
-		def json = JSON.parse(response.text)
-		return json
-	}
-
-	
 
 }

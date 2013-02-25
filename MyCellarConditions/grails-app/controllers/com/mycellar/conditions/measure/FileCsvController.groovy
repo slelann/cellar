@@ -38,9 +38,10 @@ class FileCsvController {
 		def testIterator= 1
 		int status = 0
 		def statusText = ""
-		def serieId = params.get(redirect, redirect)
+		
 		log.error("==handle==")
 		
+				
 		// set response content type to json
 		response.contentType = 'application/json'
 		
