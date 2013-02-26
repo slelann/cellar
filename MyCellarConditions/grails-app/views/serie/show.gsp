@@ -5,8 +5,37 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'serie.label', default: 'Serie')}" />
-<%--		<gvisualization:apiImport/>--%>
+
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+		<script type="text/javascript">
+			// Load the Visualization API and the areachart package.
+	        //google.load('visualization', '1', {'packages':['annotatedtimeline']});
+	        google.load('visualization', '1', {'packages':['corechart']});
+	        
+	        // Set a callback to run when the API is loaded.
+	        google.setOnLoadCallback(initialize);
+	        
+	        function initialize() {
+		      var query = new google.visualization.Query("${createLink(action: 'data', params:[id: '1'])}");
+	          query.send(drawChart);
+	        }
+	        
+	        // Callback that creates and populates a data table, 
+	        // instantiates the pie chart, passes in the data and
+	        // draws it.
+	        function drawChart(response) {
+		      var data = response.getDataTable();    
+		      //var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
+	          //chart.draw(data, {displayAnnotations: false,  'zoomStartTime': new Date(2013, 7 ,2, 19, 5, 0),
+		      //          'zoomEndTime': new Date(2013, 7 ,2, 20, 12, 0) });
+
+	          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	          chart.draw(data, {});
+	        }
+
+		</script>
+		
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -44,20 +73,17 @@
 				</g:if>
 			
 				<g:if test="${serieInstance?.measures}">
+				
 				<li class="fieldcontain">
 					<span id="measures-label" class="property-label"><g:message code="serie.measures.label" default="Measures" /></span>
-					
 						<g:each in="${serieInstance.measures}" var="m">
 						<span class="property-value" aria-labelledby="measures-label"><g:link controller="measure" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
-				<br>
-				<g:form>
-				<input type="button" value="Render Pie Chart" onclick="${remoteFunction(controller:'visualization',action:'render',update:'chart')}" >
-				</g:form>
-				<div id="chart"></div>
 				
+				<div id="chart_div" style="width:400; height:250"></div>
+						
 				</g:if>
 			
 			</ol>

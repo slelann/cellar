@@ -1,5 +1,6 @@
 package com.mycellar.conditions.measure
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 class SerieController {
@@ -10,6 +11,45 @@ class SerieController {
         redirect(action: "list", params: params)
     }
 
+	def data(Long id)  {
+		StringBuffer sb = new StringBuffer()
+		sb.append("data ")
+		sb.append(id)
+		print sb.toString()
+		
+		def serieInstance = Serie.get(id)
+		def map = [:]
+		map.version = 0.5
+		map.reqId = '0'
+		map.status = 'ok'
+		
+		def columns = []
+		columns << [label: 'Date', type: 'datetime']
+		columns << [label: 'Temperature', type: 'number']
+//		columns << [label: 'title1', type: 'string']
+//		columns << [label: 'text1', type: 'string']
+		columns << [label: 'Humidity', type: 'number']
+//		columns << [label: 'title2', type: 'string']
+//		columns << [label: 'text2', type: 'string']
+
+		def data = serieInstance.measures
+		def rows = []
+		def cells
+		data.each {
+			cells = []
+			cells << [v: it.measureDate] 
+			cells << [v: it.celsiusTemperature]  
+			//cells << [v: 'undefined'] << [v: 'undefined']
+			cells << [v: it.humidity]
+			//cells << [v: 'undefined'] << [v: 'undefined']
+			rows << ['c': cells]
+
+		}
+		def table = [cols: columns, rows: rows]
+		map.table = table
+		render "google.visualization.Query.setResponse(" + (map as JSON) + ")"
+	}
+	
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [serieInstanceList: Serie.list(params), serieInstanceTotal: Serie.count()]
