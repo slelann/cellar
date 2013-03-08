@@ -96,9 +96,9 @@ grails.plugins.springsecurity.password.algorithm='SHA-512'
 
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.mycellar.conditions.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.mycellar.conditions.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.mycellar.conditions.user.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.mycellar.conditions.user.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.user.Role'
 
 // My constants
 openweathermap {
