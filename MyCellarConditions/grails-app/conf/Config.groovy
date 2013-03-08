@@ -92,13 +92,12 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
-grails.plugins.springsecurity.password.algorithm='SHA-512'
-
-
 // Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.password.algorithm='SHA-512'
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.mycellar.conditions.user.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.mycellar.conditions.user.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.user.Role'
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/serie'
 
 // My constants
 openweathermap {

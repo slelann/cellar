@@ -26,11 +26,7 @@ class SerieController {
 		def columns = []
 		columns << [label: 'Date', type: 'datetime']
 		columns << [label: 'Temperature', type: 'number']
-//		columns << [label: 'title1', type: 'string']
-//		columns << [label: 'text1', type: 'string']
 		columns << [label: 'Humidity', type: 'number']
-//		columns << [label: 'title2', type: 'string']
-//		columns << [label: 'text2', type: 'string']
 
 		def data = serieInstance.measures
 		def rows = []
