@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
-        runtime 'mysql:mysql-connector-java:5.1.20'
+		runtime "mysql:mysql-connector-java:5.1.18"
     }
 
     plugins {
@@ -96,8 +96,12 @@ grails.project.dependency.resolution = {
 		// WS client
 		compile ":wslite:0.7.1.0"
 		// QUARTZ jobs
-		compile ":quartz:1.0-RC5"
+		compile ":quartz:1.0-RC6"
 		compile ":quartz-monitor:0.3-RC1"
+		
+		compile ':heroku:1.0.1'
+		compile ':cloud-support:1.0.8'
+		
     }
 	
 }

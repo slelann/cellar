@@ -40,8 +40,8 @@ environments {
             driverClassName = "com.mysql.jdbc.Driver"
             username = "slelann"
             password = "satanas"
-            dbCreate = "update"
-            url = "jdbc:mysql:cellardb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            dbCreate = "create-drop"
+            url = "jdbc:mysql://localhost:3306/cellardb?autoreconnect=true"
             pooled = true
             properties {
                maxActive = -1

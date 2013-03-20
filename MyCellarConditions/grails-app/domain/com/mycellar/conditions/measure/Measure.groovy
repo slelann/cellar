@@ -21,7 +21,7 @@ class Measure implements Comparable {
 	static belongsTo = [serie: Serie]
 	
     static constraints = {
-		measureDate( nullable: false)
+		measureDate( nullable: false, unique: true)
 		humidity(range:0..100, nullable: false)
 		celsiusTemperature(nullable:false)
     }

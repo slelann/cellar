@@ -14,7 +14,7 @@ class Serie {
 	}
 	
     static constraints = {
-		serieName(nullable: false)
-		place(nullable: false)
+		serieName(nullable: false, unique: true)
+		place(nullable: false, unique: true)
     }
 }

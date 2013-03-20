@@ -100,6 +100,9 @@ grails.plugins.springsecurity.authority.className = 'com.mycellar.conditions.use
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/serie'
 
 // My constants
+grails.plugin.cloudfoundry.username="slelann@gmail.com"
+grails.plugin.cloudfoundry.password="dlSzFZ8d"
+
 openweathermap {
 	service	{
 		urlClient   = 'http://api.openweathermap.org/data/2.1/weather'
